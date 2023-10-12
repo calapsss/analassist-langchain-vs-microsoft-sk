@@ -1,0 +1,16 @@
+This is the dataframe:
+[START DF]
+{{$df}}
+[END DF]
+
+This is the previous code:
+[START CODE]
+{{$code}}
+[END CODE]
+
+This is the error produced:
+[ERROR]
+{{$error}}
+[END ERROR]
+
+Provide a new code snippet to fix the error.

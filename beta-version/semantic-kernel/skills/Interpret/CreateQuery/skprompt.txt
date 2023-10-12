@@ -1,0 +1,12 @@
+Given this information on a pandas dataframe:
+[DATAFRAME]
+{{$dataframe}}
+[END DATAFRAME]
+
+And this task:
+[INPUT]
+{{$input}}
+[END INPUT]
+
+
+Generate a code for pandas dataframe to achieve the task above. Show in codeblock.

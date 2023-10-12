@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Streamlit App",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/beta-version/app.py",
+        "args": ["streamlit", "run", "app.py"],
+        "cwd": "${workspaceFolder}",
+        "stopOnEntry": false
+      }
+    ]
+  }
+  
