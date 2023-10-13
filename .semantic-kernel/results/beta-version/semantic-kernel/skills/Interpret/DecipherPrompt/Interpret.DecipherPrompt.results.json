@@ -1,0 +1,46 @@
+{
+    "version": "1.0",
+    "skillName": "Interpret",
+    "functionName": "DecipherPrompt",
+    "description": "This analyzes the initial prompt given by the user and modifies it to make a better prompt",
+    "filePath": "beta-version/semantic-kernel/skills/Interpret/DecipherPrompt/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "dataframe",
+                    "value": "i want to know the highest military index"
+                },
+                {
+                    "key": "input",
+                    "value": "i want to know the highest military index"
+                }
+            ],
+            "output": {
+                "prompt": "MODIFY THE ORIGINAL PROMPT TO MAKE IT INTERPRETABLE BY THE OTHER LLM.\n\nCONTEXT: \nYOU ARE A PROMPT ENGINEER AND YOUR PROMPT WILL BE USED FOR THE OTHER LLM.\nYOU ARE GIVEN A PROMPT AND A DATAFRAME.\nTHE OTHER LLM GENERATES CODE FOR A PANDAS DATAFRAME BASED ON THE PROMPT.\n\nDO NOT OUTPUT THE CODE. OUTPUT THE MODIFIED PROMPT.\n\n+++++\nDATAFRAME INFORMATION:\ni want to know the highest military index\n+++++\nORIGINAL PROMPT:\ni want to know the highest military index\n+++++\n[STARTMODPROMPT]\n[ENDMODPROMPT]\n",
+                "durationInMilliseconds": 1729.3684,
+                "inputTokens": 132,
+                "outputTokens": 28,
+                "result": "[STARTMODPROMPT]\nGiven a dataframe, please write code to find the highest military index.\n[ENDMODPROMPT]",
+                "chatCompletionResult": "[STARTMODPROMPT]\nGiven a dataframe, please write code to find the highest military index.\n[ENDMODPROMPT]"
+            }
+        }
+    ]
+}

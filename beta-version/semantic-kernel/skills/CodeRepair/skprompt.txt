@@ -1,16 +1,26 @@
-This is the dataframe:
+PROVIDE A NEW CODE GIVEN THE TASK AND DATAFRAME TO FIX THE ERROR FROM PREVIOUS CODE.
+
++++++
+TASK:
+{{$task}}
++++++
+DATAFRAME INFO:
 [START DF]
 {{$df}}
 [END DF]
-
-This is the previous code:
++++++
+PREVIOUS CODE:
 [START CODE]
 {{$code}}
 [END CODE]
-
-This is the error produced:
++++++
+ERROR:
 [ERROR]
 {{$error}}
 [END ERROR]
++++++
+[NEWCODE]
+Add Your Code Here
+[ENDNEWCODE]
 
-Provide a new code snippet to fix the error.
+

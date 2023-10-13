@@ -1,0 +1,22 @@
+{
+    "name": "InterpretQuery",
+    "input": "",
+    "skills": [
+        {
+            "name": "Interpret",
+            "folder": "beta-version/semantic-kernel/skills",
+            "isSemantic": true,
+            "functions": [
+                {
+                    "label": "AnalyzeDataframe"
+                },
+                {
+                    "label": "CreateQuery"
+                },
+                {
+                    "label": "DecipherPrompt"
+                }
+            ]
+        }
+    ]
+}

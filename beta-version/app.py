@@ -2,13 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import openai 
-
+import re
+import numpy as np
+import matplotlib.pyplot as plt
 import semantic_kernel as sk
 from semantic_kernel.connectors.ai.open_ai import (
-    OpenAITextCompletion
+    OpenAITextCompletion,
+    OpenAIChatCompletion,
 )
 from semantic_kernel.orchestration.context_variables import ContextVariables
-
 
 
 
@@ -20,8 +22,9 @@ def app():
     # Initialize Semantic Kernel
     kernel = sk.Kernel()
     api_key, org_id = sk.openai_settings_from_dot_env()
-    kernel.add_text_completion_service(
-            "dv", OpenAITextCompletion("gpt-3.5-turbo-instruct", api_key, org_id)
+    kernel.add_chat_service(
+            "chat_completion", 
+            OpenAIChatCompletion("gpt-3.5-turbo", api_key, org_id)
         )
     
     skills_directory = "semantic-kernel/skills"
@@ -31,10 +34,13 @@ def app():
     interpret_skill = kernel.import_semantic_skill_from_directory(
         skills_directory, "Interpret"
     )
+    codegen_skill = kernel.import_semantic_skill_from_directory(
+        skills_directory, "CodeGen"
+    )
 
     analyzeDataframe_function = interpret_skill["AnalyzeDataframe"]
     decipherPrompt_function = interpret_skill["DecipherPrompt"]
-    createQuery_function = interpret_skill["CreateQuery"]
+    createQuery_function = codegen_skill["GenerateCode"]
 
 
 
@@ -50,9 +56,12 @@ def app():
         uploaded_file = st.sidebar.file_uploader("Choose a file")
 
         if uploaded_file is not None:
-            df = pd.read_csv(uploaded_file, header=1)
-
-            df_analysis = analyzeDataframe_function(variables=ContextVariables(content=df.to_string()[:4000]))
+            df = pd.read_csv(uploaded_file)
+            analydf = df.head()
+            print("Doing Dataframe Analysis... \n\n")
+            print("PROMPT: ", analydf)
+            df_analysis = analyzeDataframe_function(variables=ContextVariables(content=analydf.to_string()[:4000])).result
+            print("RESPONSE: ", df_analysis)
             st.sidebar.write('Data uploaded successfully')
 
         #Main page
@@ -74,23 +83,31 @@ def app():
         submit_button = form.form_submit_button(label="Send")
 
         # Generate response when submit button is clicked
-        if submit_button:
-            prompt = f"User: {message}\nAnalAssist:"
-            print(df_analysis)
-            context_variables = ContextVariables(content=prompt, variables={"dataframe": df_analysis.translate()})
-            result = decipherPrompt_function(variables=context_variables)
-            print(result)
-            st.write(result)
+        if submit_button and uploaded_file is not None:
+            prompt = f"{message}"
+            print("INTERPRETING PROMPT...")
+            print("Prompt: ", prompt)
+            context_variables = ContextVariables(content=prompt, variables={"dataframe": df_analysis})
+            modifiedPrompt = decipherPrompt_function(variables=context_variables).result
+            print("Response: ", modifiedPrompt)
+            print("GENERATING CODE... \n\n")
+            print("Prompt: ", modifiedPrompt)
+            context_variables = ContextVariables(content=modifiedPrompt, variables={"dataframe": df_analysis})
+            responseTask = createQuery_function(variables=context_variables).result
+            print("RESPONSE: ", responseTask)
+            try:
+                code = re.search(r'\[STARTCODE\]\n(.*?)\n\[ENDCODE\]', responseTask, re.DOTALL).group(1)
+            except:
+                code = 'st.write("Error")'
+            
+            try:
+                explanation = re.search(r'\[EXPLANATION\]\n(.*?)\n\[ENDEXPLANATION\]', responseTask, re.DOTALL).group(1)
+            except:
+                explanation = "No Explanation"
+            exec(code)
+            st.write(explanation)
 
     ui_elements()
-
-
-
-
-
-
-    
-        
 
 
 # Run Streamlit app

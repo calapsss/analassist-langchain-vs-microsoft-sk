@@ -1,0 +1,105 @@
+{
+    "plan": {
+        "state": [
+            {
+                "Key": "INPUT",
+                "Value": ""
+            }
+        ],
+        "steps": [
+            {
+                "state": [
+                    {
+                        "Key": "INPUT",
+                        "Value": ""
+                    }
+                ],
+                "steps": [],
+                "parameters": [
+                    {
+                        "Key": "INPUT",
+                        "Value": "INPUT"
+                    }
+                ],
+                "outputs": [
+                    "RESULT__analyze_dataframe"
+                ],
+                "next_step_index": 0,
+                "name": "AnalyzeDataframe",
+                "skill_name": "Interpret",
+                "description": "Determine the shape and columns of the data.",
+                "executed": false
+            },
+            {
+                "state": [
+                    {
+                        "Key": "INPUT",
+                        "Value": ""
+                    }
+                ],
+                "steps": [],
+                "parameters": [
+                    {
+                        "Key": "INPUT",
+                        "Value": "INPUT"
+                    },
+                    {
+                        "Key": "dataframe",
+                        "Value": "RESULT__analyze_dataframe"
+                    }
+                ],
+                "outputs": [
+                    "RESULT__create_query"
+                ],
+                "next_step_index": 0,
+                "name": "CreateQuery",
+                "skill_name": "Interpret",
+                "description": "Creates a query for pandas dataframe based on user prompt and the data to work with.",
+                "executed": false
+            },
+            {
+                "state": [
+                    {
+                        "Key": "INPUT",
+                        "Value": ""
+                    }
+                ],
+                "steps": [],
+                "parameters": [
+                    {
+                        "Key": "INPUT",
+                        "Value": "INPUT"
+                    },
+                    {
+                        "Key": "dataframe",
+                        "Value": "RESULT__analyze_dataframe"
+                    }
+                ],
+                "outputs": [
+                    "RESULT__decipher_prompt"
+                ],
+                "next_step_index": 0,
+                "name": "DecipherPrompt",
+                "skill_name": "Interpret",
+                "description": "This analyzes the initial prompt given by the user and modifies it to make a better prompt",
+                "executed": false
+            }
+        ],
+        "parameters": [
+            {
+                "Key": "INPUT",
+                "Value": ""
+            }
+        ],
+        "outputs": [
+            "RESULT__analyze_dataframe",
+            "RESULT__create_query",
+            "RESULT__decipher_prompt"
+        ],
+        "next_step_index": 0,
+        "name": "",
+        "skill_name": "Microsoft.SemanticKernel.Planning.Plan",
+        "description": "TemporaryCode",
+        "executed": false
+    }
+}

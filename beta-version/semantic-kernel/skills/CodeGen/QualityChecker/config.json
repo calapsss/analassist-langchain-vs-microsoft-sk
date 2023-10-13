@@ -1,9 +1,9 @@
 {
     "schema": 1,
     "type": "completion",
-    "description": "Determine the shape and columns of the data.",
+    "description": "Creates a query for pandas dataframe based on user prompt and the data to work with.",
     "completion": {
-        "max_tokens": 1000,
+        "max_tokens": 2000,
         "temperature": 0,
         "top_p": 0,
         "presence_penalty": 0,

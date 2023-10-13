@@ -3,7 +3,7 @@
     "type": "completion",
     "description": "Creates a query for pandas dataframe based on user prompt and the data to work with.",
     "completion": {
-        "max_tokens": 256,
+        "max_tokens": 2000,
         "temperature": 0,
         "top_p": 0,
         "presence_penalty": 0,
