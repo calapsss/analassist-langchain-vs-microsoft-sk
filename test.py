@@ -1,19 +1,13 @@
 import pandas as pd
-	
-dataframe = pd.read_csv("test.csv")
+import matplotlib.pyplot as plt
 
-print(dataframe)
-military_strength = dataframe['Military Strength']
-# military_strength_power_index = dataframe['Military Strength Power Index']
-# aircraft_strength = dataframe['Aircraft Strength']
-# aircraft_strength_value = dataframe['Aircraft Strength value']
-# fighter_interceptor_strength = dataframe['Fighter/Interceptor Strength']
-# fighter_interceptor_strength_value = dataframe['Fighter/Interceptor Strength value']
-# attack_aircraft_strength = dataframe['Attack Aircraft Strength']
-# attack_aircraft_strength_value = dataframe['Attack Aircraft Strength value']
-# transport_aircraft_fleet_strength = dataframe['Transport Aircraft Fleet Strength']
-# transport_aircraft_fleet_strength_value = dataframe['Transport Aircraft Fleet Strength value']
-# trainer_aircraft_fleet = dataframe['Trainer Aircraft Fleet']
-# trainer_aircraft_fleet_value = dataframe['Trainer Aircraft Fleet value']
-# helicopter_fleet_strength = dataframe['Helicopter Fleet Strength']
-print(military_strength)
+df = pd.read_csv("milexpend.csv")
+
+# Group the dataframe by country and calculate the sum of military expenditure
+grouped_df = df.groupby('country')['Military expenditure (current USD)'].sum()
+
+# Create a pie chart using the grouped data
+plt.pie(grouped_df, labels=grouped_df.index)
+
+# Display the pie chart
+plt.show()

@@ -16,7 +16,7 @@ PREVIOUS CODE:
 +++++
 ERROR:
 [ERROR]
-{{$error}}
+{{$input}}
 [END ERROR]
 +++++
 [NEWCODE]

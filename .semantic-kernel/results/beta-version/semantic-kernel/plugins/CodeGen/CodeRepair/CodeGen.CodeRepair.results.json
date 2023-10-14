@@ -1,0 +1,54 @@
+{
+    "version": "1.0",
+    "skillName": "CodeGen",
+    "functionName": "CodeRepair",
+    "description": "This checks the error, code, and dataframe",
+    "filePath": "beta-version/semantic-kernel/plugins/CodeGen/CodeRepair/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 256,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "task",
+                    "value": "Make a good graph for expenditure"
+                },
+                {
+                    "key": "df",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                },
+                {
+                    "key": "code",
+                    "value": "import pandas as pd   import matplotlib.pyplot as plt \t df = pd.read_csv(\"milexpend.csv\")   \t \t# Group the dataframe by country and calculate the sum of military expenditure grouped_df = df.groupby('country')['Military expenditure (current USD)'].sum() \t \t# Create a pie chart using the grouped data plt.pie(grouped_df, labels=grouped_df.index) \t \t# Display the pie chart using streamlit st.pyplot()"
+                },
+                {
+                    "key": "error",
+                    "value": "File \"/Users/pips/Documents/GitHub/analassist/test.py\", line 17, in <module>     st.pyplot() NameError: name 'st' is not defined. Did you mean: 'set'?"
+                }
+            ],
+            "output": {
+                "prompt": "PROVIDE A NEW CODE GIVEN THE TASK AND DATAFRAME TO FIX THE ERROR FROM PREVIOUS CODE.\n\n+++++\nTASK:\nMake a good graph for expenditure\n+++++\nDATAFRAME INFO:\n[START DF]\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n[END DF]\n+++++\nPREVIOUS CODE:\n[START CODE]\nimport pandas as pd   import matplotlib.pyplot as plt \t df = pd.read_csv(\"milexpend.csv\")   \t \t# Group the dataframe by country and calculate the sum of military expenditure grouped_df = df.groupby('country')['Military expenditure (current USD)'].sum() \t \t# Create a pie chart using the grouped data plt.pie(grouped_df, labels=grouped_df.index) \t \t# Display the pie chart using streamlit st.pyplot()\n[END CODE]\n+++++\nERROR:\n[ERROR]\nFile \"/Users/pips/Documents/GitHub/analassist/test.py\", line 17, in <module>     st.pyplot() NameError: name 'st' is not defined. Did you mean: 'set'?\n[END ERROR]\n+++++\n[NEWCODE]\nAdd Your Code Here\n[ENDNEWCODE]\n\n\n",
+                "durationInMilliseconds": 3212.6851,
+                "inputTokens": 325,
+                "outputTokens": 91,
+                "result": "[NEW CODE]\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv(\"milexpend.csv\")\n\n# Group the dataframe by country and calculate the sum of military expenditure\ngrouped_df = df.groupby('country')['Military expenditure (current USD)'].sum()\n\n# Create a pie chart using the grouped data\nplt.pie(grouped_df, labels=grouped_df.index)\n\n# Display the pie chart\nplt.show()",
+                "chatCompletionResult": "[NEW CODE]\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv(\"milexpend.csv\")\n\n# Group the dataframe by country and calculate the sum of military expenditure\ngrouped_df = df.groupby('country')['Military expenditure (current USD)'].sum()\n\n# Create a pie chart using the grouped data\nplt.pie(grouped_df, labels=grouped_df.index)\n\n# Display the pie chart\nplt.show()"
+            }
+        }
+    ]
+}

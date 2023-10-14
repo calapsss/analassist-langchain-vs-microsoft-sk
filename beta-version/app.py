@@ -6,6 +6,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import semantic_kernel as sk
+import traceback
 from semantic_kernel.connectors.ai.open_ai import (
     OpenAITextCompletion,
     OpenAIChatCompletion,
@@ -27,7 +28,7 @@ def app():
             OpenAIChatCompletion("gpt-3.5-turbo", api_key, org_id)
         )
     
-    skills_directory = "semantic-kernel/skills"
+    skills_directory = "semantic-kernel/plugins"
 
 
     # Import skills
@@ -41,9 +42,7 @@ def app():
     analyzeDataframe_function = interpret_skill["AnalyzeDataframe"]
     decipherPrompt_function = interpret_skill["DecipherPrompt"]
     createQuery_function = codegen_skill["GenerateCode"]
-
-
-
+    repairCode_function = codegen_skill["CodeRepair"]
 
 
     def ui_elements():
@@ -104,7 +103,33 @@ def app():
                 explanation = re.search(r'\[EXPLANATION\]\n(.*?)\n\[ENDEXPLANATION\]', responseTask, re.DOTALL).group(1)
             except:
                 explanation = "No Explanation"
-            exec(code)
+            
+
+            error_message = ""
+            x=0
+            while x < 3:
+                try:
+                    exec(code)
+                    x = 4
+                except Exception as e:
+                    if (x == 2):
+                        st.write("Error: ", e)
+                    x += 1
+                    error_message = traceback.format_exc()
+                    print("Trying to repair code...")
+                    context_variables = ContextVariables(content=error_message, 
+                                                         variables={"task": modifiedPrompt, 
+                                                                    "df": df_analysis, 
+                                                                    "code": code, })
+                    print("Prompt: ", error_message)
+                    code  = repairCode_function(variables=context_variables).result
+                    print("Response: ", code)
+                    
+
+
+
+
+            
             st.write(explanation)
 
     ui_elements()

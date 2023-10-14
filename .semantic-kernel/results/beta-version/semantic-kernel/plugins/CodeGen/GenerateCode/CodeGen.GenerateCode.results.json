@@ -1,0 +1,46 @@
+{
+    "version": "1.0",
+    "skillName": "CodeGen",
+    "functionName": "GenerateCode",
+    "description": "Creates a query for pandas dataframe based on user prompt and the data to work with.",
+    "filePath": "beta-version/semantic-kernel/plugins/CodeGen/GenerateCode/skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-3.5-turbo",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-3.5-turbo",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 2000,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "Try to make a pie chart but purposefully put an error in the code"
+                },
+                {
+                    "key": "dataframe",
+                    "value": "country,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income"
+                }
+            ],
+            "output": {
+                "prompt": "GENERATE A CODE FOR PANDAS DATAFRAME TO ACHIEVE THE TASK. \n\nDO NOT DEFINE THE DATAFRAME AGAIN\n+++++\nDO NOT IMPORT LIBRARIES AGAIN\n+++++\nASSUME THAT dataframe is already defined as df\nASSUME THAT  user should be able to view the output on streamlit\nASSUME THAT the following Libraries are already imported:\n1. pandas as pd\n2. streamlit as st \n+++++\nMARK THE START AND END OF THE CODE WITH '[STARTCODE]' AND '[ENDCODE]'\n+++++\nIF YOU HAVE VISUALIZATIONS USE Chart Elements from streamlit.\nWRITE EXPLANATION OF THE DATAFRAME AND RELATE IT TO THE TASK. \n+++++\nTASK:\nTry to make a pie chart but purposefully put an error in the code\n+++++\nDATAFRAME INFO:\ncountry,iso3c,iso2c,year,Military expenditure (current USD),Military expenditure (% of general government expenditure),Military expenditure (% of GDP),adminregion,incomeLevel Afghanistan,AFG,AF,1970,2939585.50125376,,1.62960609911055,South Asia,Low income Afghanistan,AFG,AF,1971,,,,South Asia,Low income Afghanistan,AFG,AF,1972,,,,South Asia,Low income\n+++++\n\n[STARTCODE]\n(Enter Your Here)\n[ENDCODE]\n\n[EXPLANATION]\n(Your Explanation)\n[ENDEXPLANATION]",
+                "durationInMilliseconds": 6835.1636,
+                "inputTokens": 296,
+                "outputTokens": 223,
+                "result": "[STARTCODE]\nimport matplotlib.pyplot as plt\n\n# Group the dataframe by country and calculate the sum of military expenditure\ngrouped_df = df.groupby('country')['Military expenditure (current USD)'].sum()\n\n# Create a pie chart using the grouped data\nplt.pie(grouped_df, labels=grouped_df.index)\n\n# Display the pie chart using streamlit\nst.pyplot()\n[ENDCODE]\n\n[EXPLANATION]\nThe code starts by importing the necessary libraries, including matplotlib.pyplot for creating the pie chart and streamlit for displaying the chart. \n\nNext, the dataframe is grouped by the 'country' column and the sum of military expenditure is calculated for each country using the 'Military expenditure (current USD)' column. This creates a new dataframe called 'grouped_df'.\n\nThen, a pie chart is created using the 'grouped_df' dataframe. The labels for the pie chart are set as the index of the 'grouped_df' dataframe, which represents the country names.\n\nFinally, the pie chart is displayed using the st.pyplot() function from streamlit.\n\n[ENDEXPLANATION]",
+                "chatCompletionResult": "[STARTCODE]\nimport matplotlib.pyplot as plt\n\n# Group the dataframe by country and calculate the sum of military expenditure\ngrouped_df = df.groupby('country')['Military expenditure (current USD)'].sum()\n\n# Create a pie chart using the grouped data\nplt.pie(grouped_df, labels=grouped_df.index)\n\n# Display the pie chart using streamlit\nst.pyplot()\n[ENDCODE]\n\n[EXPLANATION]\nThe code starts by importing the necessary libraries, including matplotlib.pyplot for creating the pie chart and streamlit for displaying the chart. \n\nNext, the dataframe is grouped by the 'country' column and the sum of military expenditure is calculated for each country using the 'Military expenditure (current USD)' column. This creates a new dataframe called 'grouped_df'.\n\nThen, a pie chart is created using the 'grouped_df' dataframe. The labels for the pie chart are set as the index of the 'grouped_df' dataframe, which represents the country names.\n\nFinally, the pie chart is displayed using the st.pyplot() function from streamlit.\n\n[ENDEXPLANATION]"
+            }
+        }
+    ]
+}

@@ -1,8 +1,4 @@
 # analassist
-Analysis Assistant (Data Pipeline for O-96)
+Analysis Assistant 
+Quick spin up of an analysis assistant for csv files using Microsoft Semantic Kernel
 
-- [ ] Docker Dev environment setup (fuck this)
-- [ ] Semantic Kernel Basic Prompt
-- [/] Add Streamlit
-- [ ] Basic Autopilot framework implementation
-- [ ] Design architecture in aws lambda or azure

@@ -4,6 +4,8 @@ DO NOT DEFINE THE DATAFRAME AGAIN
 +++++
 DO NOT IMPORT LIBRARIES AGAIN
 +++++
+ONLY USE STREAMLIT FOR GRAPHS AND CHARTS
++++++
 ASSUME THAT dataframe is already defined as df
 ASSUME THAT  user should be able to view the output on streamlit
 ASSUME THAT the following Libraries are already imported:
