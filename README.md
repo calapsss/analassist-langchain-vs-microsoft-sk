@@ -1,6 +1,6 @@
-# analassist
+# AnalAssist - LangChain vs. Microsoft Semantic Kernel
 Analysis Assistant 
-Quick spin up of an analysis assistant for csv files using Microsoft Semantic Kernel
+Quick spin up of an analysis assistant for csv files using Microsoft Semantic Kernel and Langchain. We attempt to make a full application and compare the two implementations.
 
 ## Microsoft Semantic Kernel
 ### Speed of Development
