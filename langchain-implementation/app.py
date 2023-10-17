@@ -27,7 +27,7 @@ class semanticFunctions:
         ("human", analyzeDfTemplate),
     ]
     )
-    analyzeDfChain = analyzeDfPrompt | ChatOpenAI() | StrOutputParser()
+    analyzeDfChain = analyzeDfPrompt | chat_model | StrOutputParser()
 
     #Decipher Prompt
     decipherPromptSystem = "You are a prompt engineer"
