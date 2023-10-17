@@ -6,9 +6,9 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 import re
+import os
 
-llm = OpenAI(openai_api_key="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")
-chat_model = ChatOpenAI(openai_api_key="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", model_name="gpt-3.5-turbo")
+chat_model = ChatOpenAI(openai_api_key=os.getenv("OPENAI_API_KEY"), model_name="gpt-3.5-turbo")
 
 class semanticFunctions:
     #Analyze Dataframe
@@ -54,7 +54,7 @@ class semanticFunctions:
         ("system", decipherPromptSystem),
         ("human", decipherPromptTemplate),
     ])
-    decipherPromptChain = decipherPrompt | ChatOpenAI() | StrOutputParser()
+    decipherPromptChain = decipherPrompt | chat_model | StrOutputParser()
 
 
     #GenerateCode
@@ -98,7 +98,7 @@ class semanticFunctions:
         ("system", generateCodeSystem),
         ("human", generateCodeTemplate),
     ])
-    generateCodeChain = generateCodePrompt | ChatOpenAI() | StrOutputParser()
+    generateCodeChain = generateCodePrompt | chat_model | StrOutputParser()
 
     # Code Repair
     repairCodeSystem = "You are a code repairer"
@@ -134,7 +134,7 @@ class semanticFunctions:
         ("human", repairCodeTemplate),
     ])
 
-    repairCodeChain = repairCodePrompt | ChatOpenAI() | StrOutputParser()
+    repairCodeChain = repairCodePrompt | chat_model | StrOutputParser()
 
 
 

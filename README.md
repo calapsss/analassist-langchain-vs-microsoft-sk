@@ -12,6 +12,7 @@ Quick spin up of an analysis assistant for csv files using Microsoft Semantic Ke
 - To be tested...
 
 ## LangChain
+### Speed of Development
 - Learning curve was really quick. 10 minutes to spin up a basic app.
 - Difficult testing for prompts.
 - Approx 1 hour to finish the whole app without prior knowledge of langchain
